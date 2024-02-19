@@ -19,6 +19,7 @@ iziToast.show({
   // Вибір елемента для використання з Flatpickr
   const datetimePicker = document.querySelector('#datetime-picker');
   const startButton = document.querySelector('[data-start]');
+  startButton.disabled = true;
   let userSelectedDate;
 
   
@@ -32,7 +33,10 @@ iziToast.show({
     onClose: function (selectedDates) {
       userSelectedDate = selectedDates[0];
       if (userSelectedDate <= new Date()) {
-        window.alert('Please choose a date in the future');
+        
+        iziToast.warning({
+          title: 'Будь ласка, оберіть дату в майбутньому',
+        });
         startButton.disabled = true;
       } else {
         startButton.disabled = false;
@@ -41,11 +45,12 @@ iziToast.show({
   };
 
 
+
   // Ініціалізація Flatpickr
-  if (datetimePicker && options) {
-    flatpickr(datetimePicker, options);
-  } else {
-    console.log('datetimePicker або options не визначені або дорівнюють null');
+if (datetimePicker && options) {
+  flatpickr(datetimePicker, options);
+} else {
+      console.log('datetimePicker або options не визначені або дорівнюють null');
   }
 
   flatpickr(datetimePicker, options);
